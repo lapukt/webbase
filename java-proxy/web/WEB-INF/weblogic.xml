@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app>
+	<charset-params>
+		<input-charset>
+			<resource-path>/*</resource-path>
+			<java-charset-name>UTF8</java-charset-name>
+		</input-charset>
+	</charset-params>
+	<context-root>/</context-root>
+	
+	<!-- 设置优先记载应用中的WEB-INF/下的jar包 -->
+	<container-descriptor>
+		<prefer-web-inf-classes>false</prefer-web-inf-classes>
+	</container-descriptor>
+</weblogic-web-app>

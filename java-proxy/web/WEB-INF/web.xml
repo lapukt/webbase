@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!-- 反向代理 报表世界后端 -->
+    <servlet>
+        <servlet-name>JGBSServerServlet</servlet-name>
+        <servlet-class>com.yss.proxy.servlet.WasProxyServlet</servlet-class>
+        <!-- 去掉头地址 -->
+        <init-param>
+            <param-name>head</param-name>
+            <param-value>/dist/app</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JGBSServerServlet</servlet-name>
+        <url-pattern>/dist/app/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet 处理类入口-->
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.yss.proxy.servlet.IndexServlet</servlet-class>
+        <!-- 约定用户信息key-->
+        <init-param>
+            <param-name>sm_user</param-name>
+            <param-value>SM_USER</param-value>
+        </init-param>
+        <!-- 测试用户,仅供开发使用,默认value为空-->
+        <init-param>
+            <param-name>testUserName</param-name>
+            <param-value></param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet 测试-->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.yss.proxy.servlet.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <!-- Servlet 配置-->
+    <servlet>
+        <servlet-name>SetServlet</servlet-name>
+        <servlet-class>com.yss.proxy.servlet.SetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- 默认访问页面-->
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- 500异常页面-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+
+</web-app>
